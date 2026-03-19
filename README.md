@@ -14,9 +14,9 @@
 - More coming soon...
 
 # TODO
-[x] Add arguments for views
-[ ] Add arguments for sorting
-[ ] Add multi-file opening support
-[ ] Add settings file ?
-[ ] Connect to homebrew tap
-[ ] Installation guide here
+- [x] Add arguments for views
+- [ ] Add arguments for sorting
+- [ ] Add multi-file opening support
+- [ ] Add settings file ?
+- [ ] Connect to homebrew tap
+- [ ] Installation guide here
