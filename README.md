@@ -8,15 +8,16 @@
 </p>
 
 # Features
+
 - Reveal any directory or file in Finder from the Terminal
 - Open folders in grid (icon), list or column view
 - Highlight files in Finder
-- More coming soon...
+- Preview files with one command
 
 # TODO
+
 - [x] Add arguments for views
 - [ ] Add arguments for sorting
-- [ ] Add multi-file opening support
-- [ ] Add settings file ?
+- [x] Add multi-file opening support
 - [ ] Connect to homebrew tap
 - [ ] Installation guide here

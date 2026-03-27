@@ -31,11 +31,9 @@ cwd = sp.run("pwd", capture_output=True, text=True).stdout.strip()
 # Helper functions
 def error(msg):
     print(f"{RED}{msg}{RESET}", file=sys.stderr)
-    sys.exit(1)
-
+    
 # Opens dir based on view args
 def open_dir(file_path, args):
-
     # View options
     if args.i:
         display_option = "icon"
@@ -86,8 +84,20 @@ def open_dir(file_path, args):
     '''
     sp.run(["osascript", "-e", script])
 
+def choose_file_or_dir(file_path):
+    if os.path.isdir(file_path):
+        open_dir(file_path, args)
+    # Highlight it if it's a file
+    elif os.path.isfile(file_path):
+        sp.run(["open", "-R", file_path])
+    # Raise error if nonexist
+    elif not os.path.exists(file_path):
+            error(f"File '{file_path}' does not exist")
+    else:
+        error("Unknow error occurred... Consider reporting this to https://github.com/zibuyin/term2finder/issues")
+
 def preview_dir(file_path):
-    sp.run(["qlmanage", "-x", file_path], stdout=sp.DEVNULL)
+    sp.run(["qlmanage", "-p", file_path], stdout=sp.DEVNULL)
 
 # Handles arguments and directs it to functions
 def base_handler(args, cwd):
@@ -95,26 +105,21 @@ def base_handler(args, cwd):
     # If file path is provided, else give cwd
 
     if len(args.file_path) != 0:
-        file_path = args.file_path[0]
+        file_paths = args.file_path
     else:
         file_path = cwd
-
     # Use qlmanage to preview it if -p tag is set   
     if args.p:
-        preview_dir(file_path)
+        for file_path in file_paths:
+            preview_dir(file_path)
     else:
         # Runs only if not in preview mode
         # Open dir if it's a dir
-        if os.path.isdir(file_path):
-            open_dir(file_path, args)
-        # Highlight it if it's a file
-        elif os.path.isfile(file_path):
-            sp.run(["open", "-R", file_path])
-        # Raise error if nonexist
-        elif not os.path.exists(file_path):
-                error(f"File '{file_path}' does not exist")
-        else:
-            error("Unknow error occurred... Consider reporting this to https://github.com/zibuyin/term2finder/issues")
+        try:
+            for file_path in file_paths:
+                choose_file_or_dir(file_path)
+        except UnboundLocalError:
+            choose_file_or_dir(cwd)
 
 base_handler(args, cwd)
 
