@@ -19,5 +19,25 @@
 - [x] Add arguments for views
 - [ ] Add arguments for sorting
 - [x] Add multi-file opening support
-- [ ] Connect to homebrew tap
-- [ ] Installation guide here
+- [x] Connect to homebrew tap
+- [x] Installation guide here
+
+# Installation
+
+## Homebrew (tap)
+
+1. Create a Homebrew tap repository named `homebrew-term2finder`.
+2. Copy `Formula/term2finder.rb` from this repository into that tap repository.
+3. Publish a GitHub release (for example `v0.1.0`) and update `url` and `sha256` in the formula.
+4. Install using:
+
+```bash
+brew tap zibuyin/term2finder
+brew install term2finder
+```
+
+After install, run with:
+
+```bash
+tf
+```

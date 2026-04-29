@@ -21,7 +21,7 @@ parser.add_argument("-p", action="store_true", help="Previews file or folder usi
 # Gallery view is not supported by AppleScript, blame Apple.
 # parser.add_argument("-g", action="store_true", help="Sets view mode to gallary mode")
 args = parser.parse_args()
-print(args)
+# print(args)
 
 # Get working dir, backup if path not provided
 cwd = sp.run("pwd", capture_output=True, text=True).stdout.strip()
@@ -72,7 +72,7 @@ def open_dir(file_path, args):
 
     
     # If arguments are passed, this runs
-    print(display_option)
+    # print(display_option)
     script = f'''
     tell application "Finder"
         set theFolder to POSIX file "{file_path}" as alias
